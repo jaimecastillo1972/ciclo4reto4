@@ -25,6 +25,11 @@ public class HairProductController {
         return service.getAll();
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     @GetMapping("/{id}")
     public Optional<HairProduct> getProductById(@PathVariable("id") String id){
         return service.getProductById(id);

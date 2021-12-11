@@ -11,17 +11,35 @@ import java.util.Optional;
 
 @Service
 public class OrderService {
+    /**
+     * Inyeccion de codigo
+     */
     @Autowired
     private OrderRepository repository;
 
+
+    /**
+     *
+     * @return
+     */
     public List<Order> getAll(){
         return repository.getAll();
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     public Optional<Order> getOrder(Integer id){
         return repository.getOrder(id);
     }
 
+    /**
+     *
+     * @param order
+     * @return
+     */
     public Order save(Order order) {
         if (order.getId() == null) {
             return order;
@@ -36,6 +54,11 @@ public class OrderService {
         }
     }
 
+    /**
+     *
+     * @param order
+     * @return
+     */
     public Order update(Order order){
         Optional<Order> existsOrder=repository.getOrder(order.getId());
         if (existsOrder.isPresent()){
@@ -63,6 +86,11 @@ public class OrderService {
         }
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     public boolean delete(Integer id){
         Boolean aBoolean=repository.getOrder(id).map(order->{
             repository.delete(order);
@@ -71,19 +99,52 @@ public class OrderService {
         return aBoolean;
     }
 
+    /**
+     *
+     * @param zona
+     * @return
+     */
     public List<Order> findByZone(String zona){
         return repository.findByZone(zona);
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     public List<Order> findBySalesManId(Integer id){
         return repository.findBySalesManId(id);
     }
 
-    public List<Order> findByDateAndId(Date registerDay, Integer id){
-        return repository.findByDateAndId(registerDay, id);
+    /**
+     *
+     * @param id
+     * @return
+     */
+    public List<Order> ordersSalesManByID(Integer id){
+        return repository.ordersSalesManByID(id);
     }
 
-    public List<Order> findByStatus(String status){
-        return repository.findByStatus(status);
+    /**
+     *
+     * @param state
+     * @param id
+     * @return
+     */
+    public List<Order> ordersSalesManByState(String state, Integer id){
+        return repository.ordersSalesManByState(state, id);
     }
+
+    /**
+     *
+     * @param dateStr
+     * @param id
+     * @return
+     */
+    public List<Order> ordersSalesManByDate(String dateStr, Integer id) {
+        return repository.ordersSalesManByDate(dateStr,id);
+    }
+
+
 }
